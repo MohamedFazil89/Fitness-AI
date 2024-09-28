@@ -1,6 +1,8 @@
 import React from "react"
 import './App.css';
 
+import Logo from "./assets/FLOGO.png"
+
 function App() {
   return (
     <div className="SignUp-container">
@@ -8,8 +10,9 @@ function App() {
 
 
       </div>
-
       <form action="/SignUp" method="POST" className="Form-container">
+      <img src={Logo} alt="Logo" className="Logo" /> 
+      <div className="Form-elements">
       <h1 className="Title">Sign <span>up</span></h1>
       <input 
       type="text" 
@@ -51,6 +54,7 @@ function App() {
       <hr />
       <p className="Already-Account">Already have an account? <span>Login</span></p>
 
+      </div>
       </form>
      
     </div>

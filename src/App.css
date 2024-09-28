@@ -4,19 +4,45 @@
   box-sizing: border-box;
 }
 
+/* After git pull */
+
 .SignUp-container{
   display: flex;
 
 }
 
 .Image-container{
+  background-image: url("./assets/loginimage.png");
+  background-position: center;
+  background-size: cover;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: .1rem;
+  
 
 }
 
 .Form-container{
   display: flex;
   flex-direction: column;
+  display: flex;
+  justify-content: center;
 
+}
+
+.Logo{
+  width: 50px;
+  height: 50px;
+ 
+
+}
+
+.Form-elements{
+  display: flex;
+  flex-direction: column;
 }
 
 .Title{
