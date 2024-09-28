@@ -1,15 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* After git pull */
 
 .SignUp-container{
   display: flex;
+  height: 100vh;
+  background-color: rgb(39, 39, 39);
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
 
 }
+
 
 .Image-container{
   background-image: url("./assets/loginimage.png");
@@ -21,7 +28,7 @@
   justify-content: center;
   align-items: center;
   margin: .1rem;
-  
+  filter: drop-shadow(0 0 10px black);
 
 }
 
@@ -30,12 +37,18 @@
   flex-direction: column;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-left: 4rem;
+
 
 }
 
 .Logo{
   width: 50px;
   height: 50px;
+  margin: .5rem;
+  z-index: 10;
+  filter: drop-shadow(0 0 20px black);
  
 
 }
@@ -43,28 +56,168 @@
 .Form-elements{
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: black;
+  box-shadow: 0 0 10px rgba(0, 191, 255, .5);
+  padding: 0rem 1.5rem;
+  color: white;
+  filter: drop-shadow(0 0 100px rgba(0,191, 255, .9));
+
+
 }
 
 .Title{
+  font-size: 3rem;
+  font-family: 'Montserrat', sans-serif;
+  margin: 1.5rem;
+  /* margin-top: 1rem; */
+  font-weight: bold;
+
 
 }
 
 .input{
+  all: unset;
+  border-bottom: 1px solid white;
+  padding: .5rem 1rem;
+  width: 300px;
+  margin: 1rem;
+  /* margin-bottom: .3rem; */
+  text-align: start;
+
 
 }
 
-.input-date{
 
+  /* date css */
+
+.date-input-container {
+  display: flex;
+  gap: 30px; 
+  margin: .5rem;
 }
+
+.date-input {
+  width: 70px; 
+  padding: 7px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff; 
+  outline: none;
+}
+
+.date-input:last-child {
+  width: 70px; 
+}
+
+.date-input::placeholder {
+  color: #fff;
+}
+
+.date-input:focus {
+  border-color: #999; 
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+  /* end date css */
+
+
 
 .SignUp-btn{
+  all: unset;
+  width: fit-content;
+  background-color: aqua;
+  padding: 10px 130px;
+  margin: 1rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  cursor: pointer;
+  transition: .5s;
 
+
+}
+
+.SignUp-btn:hover{
+  background-color: rgba(0, 255, 255, 0.582);
 }
 
 .Circle{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: blue;
+  margin-bottom: 1rem;
 
+}
+.OAuth-container{
+  display: flex;
+  gap: 2rem;
 }
 
 .Already-Account{
+  margin-bottom: 1rem ;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 1rem;
+
+
+
+}
+.Already-Account span{
+  color: aqua;
+  cursor: pointer;
+
+}
+.Form-elements .line hr{
+  width: 10rem;
+  height: fit-content;
+  position: relative;
+  top: .5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.line{
+  display: flex;
+  margin: 1rem;
+}
+.OAuth-container span{
+  cursor: pointer;
+  /* color: red; */
+}
+.OAuth-container span:nth-child(1){
+ /* color: white; */
+ 
+
+}
+.OAuth-container span:nth-child(2){
+  color: rgb(46, 203, 255);
+}
+.OAuth-container span:nth-child(3){
+  color: rgb(36, 36, 241);
+}
+
+.Google{
+  width: 35px;
+ height: 35px;
+}
+
+.Forgot{
+  font-family: 'Poppins', sans-serif;  /* Applying Poppins font */
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.459);
+  cursor: pointer;
+  margin-left: 13rem;
+  font-weight: lighter;
 
 }
