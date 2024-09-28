@@ -37,6 +37,7 @@ function App() {
         password: user.uid,
         email: user.email,
       });
+      navigate("/Dashboard");
     } catch (err) {
       console.log(err);
     }
