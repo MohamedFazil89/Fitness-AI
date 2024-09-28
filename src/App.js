@@ -1,67 +1,104 @@
 import React, { useState } from "react";
 import './App.css';
-import Google from "./assets/google.png";
 import Logo from "./assets/FLOGO.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import facebook from "./assets/devicon_facebook.png";
+import Google from "./assets/devicon_google.png";
+import LinkedIN from "./assets/devicon_linkedin.png";
+import axios from "axios";
+import { db, auth, provider } from "./firebase/firebase"; // Fix: 'provider' from firebase.js
+import { signInWithPopup } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
   const [isSignup, setIsSignup] = useState(true);
   const [signupData, setSignupData] = useState({
-    username: "",
+    email: "",
     password: "",
     confirmPassword: "",
-    birth: { day: "", month: "", year: "" }
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setSignupData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-    if (name in signupData.birth) {
-      setSignupData((prevData) => ({
-        ...prevData,
-        birth: {
-          ...prevData.birth,
-          [name]: value
-        }
-      }));
-    } else {
-      setSignupData((prevData) => ({
-        ...prevData,
-        [name]: value
-      }));
+  // Google Auth
+  const handleGAuth = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        password: user.uid,
+        email: user.email,
+      });
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  // Auths
-
-  // GAuth
-  const handleGAuth = () =>{
-    console.log("Google oAuth");
-    
-  }
-
-  // LAuth
-  const handleLAuth = () =>{
+  // LinkedIn Auth (Placeholder)
+  const handleLAuth = () => {
     console.log("LinkedIn oAuth");
-    
-  }
+  };
 
-  // FAuth
-  const handleFAuth = () =>{
+  // Facebook Auth (Placeholder)
+  const handleFAuth = () => {
     console.log("FaceBook oAuth");
-    
-  }
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSignup) {
       if (signupData.password === signupData.confirmPassword) {
-        console.log(signupData);
+        try {
+          const response = await axios.post("http://localhost:3001/addUser", {
+            email: signupData.email, // Fix: use email
+            password: signupData.password,
+          });
 
-      }else{
+          if (response.status === 201) {
+            alert("User registered successfully!");
+            navigate("/Dashboard")
+          }
+        } catch (err) {
+          console.error("Error during signup:", err);
+          if (err.response && err.response.data.error) {
+            alert(err.response.data.error);
+          } else {
+            alert("Failed to sign up. Please try again.");
+            setSignupData({
+              email: "",
+              password: "",
+              confirmPassword: "",
+            })
+          }
+        }
+      } else {
         alert("Passwords do not match");
       }
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3001/login', {
+        email: signupData.email,
+        password: signupData.password,
+      });
+      console.log('Login successful:', response.data);
+      navigate("/Dashboard")
+      alert(response.data)
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert("Not an user? SignUp")
+
     }
   };
 
@@ -70,7 +107,7 @@ function App() {
       <div className="Image-container">
         {/* Add any additional content or images here */}
       </div>
-      <form onSubmit={handleSubmit} className="Form-container">
+      <form onSubmit={isSignup ? handleSubmit : handleLogin} className="Form-container">
         <img src={Logo} alt="Logo" className="Logo" />
         <div className="Form-elements">
           {isSignup ? (
@@ -84,11 +121,11 @@ function App() {
           )}
           <input
             type="text"
-            name="username"
-            placeholder="username"
+            name="email"
+            placeholder="email"
             autoComplete="off"
             className="input"
-            value={signupData.username}
+            value={signupData.email}
             onChange={handleChange}
           />
 
@@ -114,56 +151,6 @@ function App() {
             />
           )}
 
-          {isSignup && (
-            <div className="date-input-container">
-              <input
-                name="day"
-                type="number"
-                placeholder="DD"
-                maxLength={2}
-                required
-                className="date-input"
-                value={signupData.birth.day}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  // Limit to 2 digits
-                  if (value.length <= 2) {
-                    handleChange(e);
-                  }
-                }} />
-              <input
-                name="month"
-                type="number"
-                required
-                placeholder="MM"
-                maxLength="2"
-                className="date-input"
-                value={signupData.birth.month}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  // Limit to 2 digits
-                  if (value.length <= 2) {
-                    handleChange(e);
-                  }
-                }} />
-              <input
-                name="year"
-                type="number"
-                placeholder="YYYY"
-                required
-                maxLength="4"
-                className="date-input"
-                value={signupData.birth.year}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  // Limit to 2 digits
-                  if (value.length <= 4) {
-                    handleChange(e);
-                  }
-                }} />
-            </div>
-          )}
-
           <button type="submit" className="SignUp-btn">
             {isSignup ? "Sign Up" : "Login"}
           </button>
@@ -173,10 +160,10 @@ function App() {
               <img src={Google} alt="Google" className="Google" />
             </span>
             <span onClick={handleLAuth}>
-              <FontAwesomeIcon icon={faLinkedin} size="2x" />
+              <img src={LinkedIN} alt="LinkedIn" className="Google" />
             </span>
             <span onClick={handleFAuth}>
-              <FontAwesomeIcon icon={faFacebook} size="2x" />
+              <img src={facebook} alt="Facebook" className="Google" />
             </span>
           </div>
 
