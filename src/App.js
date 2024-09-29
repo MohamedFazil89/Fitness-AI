@@ -20,6 +20,8 @@ function App() {
     password: "",
     confirmPassword: "",
     birth: { day: "", month: "", year: "" },
+    username: "",
+    Gender: ""
   });
 
   const handleChange = (e) => {
@@ -85,6 +87,7 @@ function App() {
       const user = result.user;
       console.log("User: ", user);
       console.log("Access Token: ", token);
+      setGetDate(false)
 
     } catch (error) {
       const errorCode = error.code;
