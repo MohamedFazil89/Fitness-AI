@@ -141,6 +141,8 @@ function App() {
         email: signupData.email,
         password: signupData.password,
       });
+      console.log("POsted");
+      
 
       if (response.status === 200) {
         console.log('Login successful:', response.data);
