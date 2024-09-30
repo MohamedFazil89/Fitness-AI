@@ -26,7 +26,7 @@ function App() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     setSignupData((prevData) => {
       if (['day', 'month', 'year'].includes(name)) {
         return {
@@ -37,14 +37,14 @@ function App() {
           },
         };
       }
-      
+
       return {
         ...prevData,
         [name]: value,
       };
     });
   };
-  
+
 
   // Google Auth
   const handleGAuth = async () => {
@@ -53,7 +53,7 @@ function App() {
       const user = result.user;
 
       await setDoc(doc(db, "users", user.uid), {
-        password: user.uid, 
+        password: user.uid,
         email: user.email,
       });
       // navigate("/Dashboard"); 
@@ -67,18 +67,19 @@ function App() {
     try {
       const result = await signInWithPopup(auth, TProvider);
       const user = result.user;
-  
+
       await setDoc(doc(db, "users", user.uid), {
-        password: user.uid, 
+        password: user.uid,
         email: user.email,
       });
       // navigate("/Dashboard"); 
       setGetDate(false);
     } catch (err) {
       console.log("Twitter Authentication Error:", err);
-    }  };
+    }
+  };
 
-  const handleFAuth =  async () => {
+  const handleFAuth = async () => {
     try {
       const result = await signInWithPopup(auth, Provider);
       const credential = FacebookAuthProvider.credentialFromResult(result);
@@ -96,7 +97,8 @@ function App() {
       const credential = FacebookAuthProvider.credentialFromError(error);
 
       console.error("Error during Facebook login", errorCode, errorMessage, email, credential);
-    }  };
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -108,7 +110,7 @@ function App() {
             password: signupData.password,
           });
 
-          if (response.status === 201) {
+          if (response.status === 200) {
             alert("User registered successfully!");
             // navigate("/Dashboard");
             setGetDate(false);
@@ -120,11 +122,11 @@ function App() {
             alert(err.response.data.error);
           } else {
             alert("Failed to sign up. Please try again.");
-            setSignupData({
-              email: "",
-              password: "",
-              confirmPassword: "",
-            });
+            // setSignupData({
+            //   email: "",
+            //   password: "",
+            //   confirmPassword: "",
+            // });
           }
         }
       } else {
@@ -141,17 +143,20 @@ function App() {
         email: signupData.email,
         password: signupData.password,
       });
-      console.log("POsted");
-      
+      console.log("POsted")
+
 
       if (response.status === 200) {
         console.log('Login successful:', response.data);
-        // navigate("/Dashboard"); 
-        setGetDate(false);
+        navigate("/Dashboard"); 
+        // setGetDate(false);
       }
     } catch (error) {
-      console.error('Error during login:', error);
-      alert("Not registered? Please sign up.");
+      if(error.status === 404){
+      alert("User not found");
+
+      }
+      // alert("Not registered? Please sign up.");
     }
   };
 
@@ -159,26 +164,27 @@ function App() {
 
   const handleDateOfBirthSubmit = async (e) => {
     e.preventDefault();
-    const user = auth.currentUser;
-
-    if (user) {
+    if (isSignup) {
       try {
-
-        await setDoc(
-          doc(db, "users", user.uid),
-          { birthDate: signupData.birth },
-          { merge: true }
-        );
-
-        alert("Date of Birth updated successfully!");
+        const response = await axios.post("http://localhost:3001/BirthPost", {
+          username: signupData.username,
+          birth: {
+            day: signupData.birth.day,
+            month: signupData.birth.month,
+            year: signupData.birth.year,
+          },
+          Gender: signupData.Gender,
+          email: signupData.email,
+        });
+        alert(response.status);
         navigate("/Dashboard");
-
       } catch (err) {
-        console.log("Error saving date of birth:", err);
+        console.log(err);
+        alert(err);
       }
     }
   };
-
+  
 
   return (
     <div className="SignUp-container">
@@ -277,16 +283,16 @@ function App() {
               className="name-input"
               value={signupData.username}
               onChange={handleChange}
-              />
-              <input
+            />
+            <input
               name="Gender"
               type="text"
-              placeholder="name"
+              placeholder="Gender"
               required
               className="gender-input"
               value={signupData.Gender}
               onChange={handleChange}
-             />
+            />
 
 
           </section>
