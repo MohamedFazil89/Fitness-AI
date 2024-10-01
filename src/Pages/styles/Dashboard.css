@@ -1,0 +1,16 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Dashboard-container{
+    background-color: #0E0E0E;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 100vh;
+    overflow: hidden;
+}

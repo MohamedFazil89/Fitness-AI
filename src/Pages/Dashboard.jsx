@@ -1,9 +1,12 @@
 import React from 'react'
+import Nav from '../Components/Nav'
+import "./styles/Dashboard.css"
+
 
 export default function Dashboard() {
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className='Dashboard-container'>
+      <Nav />
     </div>
   )
 }
