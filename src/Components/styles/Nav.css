@@ -97,6 +97,22 @@
     border-radius: 100rem;
 }
 
+/*  */
+
+.Icons {
+    filter: grayscale(100%); /* Default to gray */
+    cursor: pointer;
+}
+
+.Icons.active {
+    filter: drop-shadow(0 0 1px aqua);
+}
+
+.Icons.active {
+    filter: drop-shadow(0 0 1px aqua);
+}
+/*  */
+
 .Icons:hover{
     transform: scale(1.1);
     filter: drop-shadow(0 0 1px aqua);

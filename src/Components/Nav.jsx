@@ -13,39 +13,56 @@ import { faBell, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 export default function Nav() {
     const [isToggled, setIsToggled] = useState(false);
+    const [currentPage, setCurrentPage] = useState("Dashboard");  // Default page is "dashboard"
 
-  const handleToggle = () => {
-    setIsToggled(!isToggled);
-  };
+    const handleToggle = () => {
+        setIsToggled(!isToggled);
+    };
+
+    // Function to handle page change
+    const changePage = (page) => {
+        setCurrentPage(page);
+    };
+
+    // Function to conditionally set the active class based on current page
+    const getIconClass = (page) => {
+        return currentPage === page ? "Icons active" : "Icons";
+    };
+    const icons = {
+        Dashboard: DashboardIcon,
+        Home: HomeIcon,
+        Search: SearchIcon,
+        Chat: ChatIcon,
+        Settings: SettingIcon,
+        Logout: LogoutIcon,
+    };
+
     return (
         <div className='OverAll-container'>
             <div className="Profile-View">
                 <section className='page-info'>
                     <img src={Logo} alt="Home" className='Logo' />
-                    <h1>Dashboard</h1>
-                    <img src={DashboardIcon} alt='icons' className='Icons' />
-                    <span className='question'><FontAwesomeIcon icon={faQuestion} size='1x'/></span>
-
+                    <h1>{currentPage}</h1>
+                    <img src={icons[currentPage]} alt='icons' className={getIconClass("dashboard")} />
+                    <span className='question'><FontAwesomeIcon icon={faQuestion} size='1x' /></span>
                 </section>
                 <section className="profile-info">
                     <label className="toggle-switch">
                         <input type="checkbox" checked={isToggled} onChange={handleToggle} />
                         <span className="slider"></span>
                     </label>
-                    <span className='bell'><FontAwesomeIcon icon={faBell} size='1x'/></span>
-                    <span className='profile-pic'><img src={ProfilePic} alt='icons'  /></span>
-
+                    <span className='bell'><FontAwesomeIcon icon={faBell} size='1x' /></span>
+                    <span className='profile-pic'><img src={ProfilePic} alt='profile' /></span>
                 </section>
-
-
             </div>
+
             <div className='Nav-container'>
-                <img src={DashboardIcon} alt='icons' className='Icons' />
-                <img src={HomeIcon} alt='icons' className='Icons' />
-                <img src={SearchIcon} alt='icons' className='Icons' />
-                <img src={ChatIcon} alt='icons' className='Icons' />
-                <img src={SettingIcon} alt='icons' className='Icons' />
-                <img src={LogoutIcon} alt='icons' className='Icons' />
+                <img src={DashboardIcon} alt='Dashboard Icon' className={getIconClass("Dashboard")} onClick={() => changePage("Dashboard")} />
+                <img src={HomeIcon} alt='Home Icon' className={getIconClass("Home")} onClick={() => changePage("Home")} />
+                <img src={SearchIcon} alt='Search Icon' className={getIconClass("Search")} onClick={() => changePage("Search")} />
+                <img src={ChatIcon} alt='Chat Icon' className={getIconClass("Chat")} onClick={() => changePage("Chat")} />
+                <img src={SettingIcon} alt='Settings Icon' className={getIconClass("Settings")} onClick={() => changePage("Settings")} />
+                <img src={LogoutIcon} alt='Logout Icon' className={getIconClass("Logout")} onClick={() => changePage("Logout")} />
             </div>
         </div>
     )
