@@ -10,8 +10,11 @@ import { signInWithPopup } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { FacebookAuthProvider } from "firebase/auth";
+import { useDispatch } from 'react-redux';
+import { setUsername } from './Redux/userSlice';
 
 function App() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isSignup, setIsSignup] = useState(true);
   const [getDate, setGetDate] = useState(true);
@@ -176,6 +179,7 @@ function App() {
           Gender: signupData.Gender,
           email: signupData.email,
         });
+        dispatch(setUsername(signupData.username))
         alert(response.status);
         navigate("/Dashboard");
       } catch (err) {

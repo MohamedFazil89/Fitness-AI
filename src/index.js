@@ -4,6 +4,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard';
+import { Provider } from "react-redux";
+import store from './Redux/store';
+
 
 
 function AppRoutes() {
@@ -21,9 +24,11 @@ function AppRoutes() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Router>
-    <AppRoutes />
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <AppRoutes />
+    </Router>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

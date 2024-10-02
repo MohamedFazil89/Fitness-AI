@@ -118,6 +118,11 @@
     filter: drop-shadow(0 0 1px aqua);
 }
 
+.top{
+    filter: drop-shadow(0 0 1px aqua);
+
+}
+
 .profile-pic{
     width: 40px;
     height: 40px;

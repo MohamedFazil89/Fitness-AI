@@ -10,10 +10,12 @@ import ProfilePic from "../assets/profilepic.png"
 import "./styles/Nav.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
 
 export default function Nav() {
     const [isToggled, setIsToggled] = useState(false);
     const [currentPage, setCurrentPage] = useState("Dashboard");  // Default page is "dashboard"
+    const username = useSelector((state) => state.user.username)
 
     const handleToggle = () => {
         setIsToggled(!isToggled);
@@ -32,7 +34,7 @@ export default function Nav() {
         Dashboard: DashboardIcon,
         Home: HomeIcon,
         Search: SearchIcon,
-        Chat: ChatIcon,
+        Messages: ChatIcon,
         Settings: SettingIcon,
         Logout: LogoutIcon,
     };
@@ -42,8 +44,8 @@ export default function Nav() {
             <div className="Profile-View">
                 <section className='page-info'>
                     <img src={Logo} alt="Home" className='Logo' />
-                    <h1>{currentPage}</h1>
-                    <img src={icons[currentPage]} alt='icons' className={getIconClass("dashboard")} />
+                    <h1>{username}</h1>
+                    <img src={icons[currentPage]} alt='icons' className='Icons top' />
                     <span className='question'><FontAwesomeIcon icon={faQuestion} size='1x' /></span>
                 </section>
                 <section className="profile-info">
@@ -60,7 +62,7 @@ export default function Nav() {
                 <img src={DashboardIcon} alt='Dashboard Icon' className={getIconClass("Dashboard")} onClick={() => changePage("Dashboard")} />
                 <img src={HomeIcon} alt='Home Icon' className={getIconClass("Home")} onClick={() => changePage("Home")} />
                 <img src={SearchIcon} alt='Search Icon' className={getIconClass("Search")} onClick={() => changePage("Search")} />
-                <img src={ChatIcon} alt='Chat Icon' className={getIconClass("Chat")} onClick={() => changePage("Chat")} />
+                <img src={ChatIcon} alt='Chat Icon' className={getIconClass("Messages")} onClick={() => changePage("Messages")} />
                 <img src={SettingIcon} alt='Settings Icon' className={getIconClass("Settings")} onClick={() => changePage("Settings")} />
                 <img src={LogoutIcon} alt='Logout Icon' className={getIconClass("Logout")} onClick={() => changePage("Logout")} />
             </div>
