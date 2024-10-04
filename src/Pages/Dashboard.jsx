@@ -6,8 +6,7 @@ import "./styles/Dashboard.css"
 export default function Dashboard() {
   return (
     <div className='Dashboard-container'>
-      <Nav>
-              </Nav>
+      <Nav />
     </div>
   )
 }

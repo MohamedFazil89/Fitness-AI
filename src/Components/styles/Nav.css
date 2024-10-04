@@ -25,10 +25,11 @@
 
 .page-info{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    text-align: center;
+    /* text-align: center; */
     font-family: 'Montserrat Alternates', sans-serif;
+    margin-right:70rem;
 
 
 }
