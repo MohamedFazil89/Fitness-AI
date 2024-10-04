@@ -4,6 +4,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard';
+import Settings from './Pages/Settings';
+import Chat from './Pages/Chat';
+
+
 import { Provider } from "react-redux";
 import store from './Redux/store';
 
@@ -14,6 +18,10 @@ function AppRoutes() {
   let routes = useRoutes([
     { path: '/', element: <App /> },
     { path: '/Dashboard', element: <Dashboard /> },
+    { path: '/Settings', element: <Settings /> },
+    { path: '/Messages', element: <Chat /> },
+
+
 
 
 
