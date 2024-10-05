@@ -17,7 +17,7 @@ function AppRoutes() {
   // Define your routes here
   let routes = useRoutes([
     { path: '/', element: <App /> },
-    { path: '/Dashboard', element: <Dashboard /> },
+    { path: '/dashboard', element: <Dashboard /> },
     { path: '/Settings', element: <Settings /> },
     { path: '/Messages', element: <Chat /> },
 

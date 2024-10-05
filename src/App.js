@@ -51,19 +51,8 @@ function App() {
 
   // Google Auth
   const handleGAuth = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      await setDoc(doc(db, "users", user.uid), {
-        password: user.uid,
-        email: user.email,
-      });
-      // navigate("/Dashboard"); 
-      setGetDate(false);
-    } catch (err) {
-      console.log("Google Authentication Error:", err);
-    }
+    window.location.href = 'http://localhost:3001/auth/google';
+    
   };
 
   const handleLAuth = async () => {
@@ -105,37 +94,38 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSignup) {
-      if (signupData.password === signupData.confirmPassword) {
-        try {
-          const response = await axios.post("http://localhost:3001/addUser", {
-            email: signupData.email,
-            password: signupData.password,
-          });
-
-          if (response.status === 200) {
-            alert("User registered successfully!");
-            // navigate("/Dashboard");
-            setGetDate(false);
-
+      if (isSignup) {
+        if (signupData.password === signupData.confirmPassword) {
+          try {
+            const response = await axios.post("http://localhost:3001/addUser", {
+              email: signupData.email,
+              password: signupData.password,
+            });
+  
+            if (response.status === 200) {
+              alert("User registered successfully!");
+              navigate("/dashboard");
+              setGetDate(false);
+  
+            }
+          } catch (err) {
+            console.error("Error during signup:", err);
+            if (err.response && err.response.data.error) {
+              alert(err.response.data.error);
+            } else {
+              alert("Failed to sign up. Please try again.");
+              // setSignupData({
+              //   email: "",
+              //   password: "",
+              //   confirmPassword: "",
+              // });
+            }
           }
-        } catch (err) {
-          console.error("Error during signup:", err);
-          if (err.response && err.response.data.error) {
-            alert(err.response.data.error);
-          } else {
-            alert("Failed to sign up. Please try again.");
-            // setSignupData({
-            //   email: "",
-            //   password: "",
-            //   confirmPassword: "",
-            // });
-          }
+        } else {
+          alert("Passwords do not match.");
         }
-      } else {
-        alert("Passwords do not match.");
       }
-    }
+    
   };
 
   // Handle Login
@@ -151,12 +141,12 @@ function App() {
 
       if (response.status === 200) {
         console.log('Login successful:', response.data);
-        navigate("/Dashboard"); 
+        navigate("/dashboard");
         // setGetDate(false);
       }
     } catch (error) {
-      if(error.status === 404){
-      alert("User not found");
+      if (error.status === 404) {
+        alert("User not found");
 
       }
       // alert("Not registered? Please sign up.");
@@ -188,7 +178,7 @@ function App() {
       }
     }
   };
-  
+
 
   return (
     <div className="SignUp-container">
@@ -301,7 +291,6 @@ function App() {
 
           </section>
           <div className="date-container">
-
             <input
               name="day"
               type="number"
