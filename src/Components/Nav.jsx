@@ -7,16 +7,15 @@ import SettingIcon from "../assets/settings.png";
 import LogoutIcon from "../assets/Logout.png";
 import Logo from "../assets/FLOGO.png"
 import ProfilePic from "../assets/profilepic.png"
-import Messages from '../Pages/Chat';
 import "./styles/Nav.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faQuestion } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export default function Nav({ props }) {
     const [isToggled, setIsToggled] = useState(false);
     const [currentPage, setCurrentPage] = useState("Dashboard");  
-    const username = useSelector((state) => state.user.username)
+    // const username = useSelector((state) => state.user.username)
 
     const handleToggle = () => {
         setIsToggled(!isToggled);
@@ -66,7 +65,7 @@ export default function Nav({ props }) {
                 <img src={SettingIcon} alt='Settings Icon' className={getIconClass("Settings")} onClick={() => changePage("Settings")} />
                 <img src={LogoutIcon} alt='Logout Icon' className={getIconClass("Logout")} onClick={() => changePage("Logout")} />
             </div>
-            {<Messages />}
+            {/* {<Messages />} */}
             
             </section>
         </div>

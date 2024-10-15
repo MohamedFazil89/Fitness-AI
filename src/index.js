@@ -6,6 +6,7 @@ import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard';
 import Settings from './Pages/Settings';
 import Chat from './Pages/Chat';
+import DOB from './Pages/DOB';
 
 
 import { Provider } from "react-redux";
@@ -18,11 +19,9 @@ function AppRoutes() {
   let routes = useRoutes([
     { path: '/', element: <App /> },
     { path: '/dashboard', element: <Dashboard /> },
-    { path: '/Settings', element: <Settings /> },
-    { path: '/Messages', element: <Chat /> },
-
-
-
+    { path: '/settings', element: <Settings /> },
+    { path: '/messages', element: <Chat /> },
+    { path: '/dob', element: <DOB /> },
 
 
   ]);

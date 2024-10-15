@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './App.css';
+import ReactDOM from "react-dom";
 import Logo from "./assets/FLOGO.png";
 import facebook from "./assets/devicon_facebook.png";
 import Google from "./assets/devicon_google.png";
@@ -12,48 +13,77 @@ import { useNavigate } from "react-router-dom";
 import { FacebookAuthProvider } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { setUsername } from './Redux/userSlice';
+import DOB from "./Components/DOB";
 
-function App() {
+function App({ DOBState }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Loading state
   const [isSignup, setIsSignup] = useState(true);
-  const [getDate, setGetDate] = useState(true);
+  const [GetDate, setGetDate] = useState(true)
   const [signupData, setSignupData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
-    birth: { day: "", month: "", year: "" },
-    username: "",
-    Gender: ""
   });
+  sessionStorage.setItem("Status", isSignup)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setSignupData((prevData) => {
-      if (['day', 'month', 'year'].includes(name)) {
-        return {
-          ...prevData,
-          birth: {
-            ...prevData.birth,
-            [name]: value,
-          },
-        };
-      }
-
-      return {
-        ...prevData,
-        [name]: value,
-      };
-    });
+    setSignupData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
+  // Status send
+
+  const sendDataToBackend = async () => {
+    try {
+      // Send a POST request to your backend
+      const response = await axios.post('http://localhost:3001/getStatus', {
+        Status: isSignup,
+      }, {
+        withCredentials: true, 
+      });
+  
+      console.log("Response from backend:", response.data);
+    } catch (error) {
+      console.error("Error sending data to backend:", error);
+    }
+  };
+
+
+  // Status end
+
+
+  
 
   // Google Auth
-  const handleGAuth = async () => {
-    window.location.href = 'http://localhost:3001/auth/google';
-    
+  const handleGAuth = async (e) => {
+    e.preventDefault()
+    // setGetDate(false)
+    try {
+      // This will initiate Google login flow in a new tab/window
+      window.location.href = "http://localhost:3001/auth/google";
+      sendDataToBackend()
+    } catch (error) {
+      console.error('Google Auth failed:', error);
+    }
   };
+
+  const handleGLoginAuth = async (e) => {
+    e.preventDefault()
+    try {
+      // This will initiate Google login flow in a new tab/window
+      window.location.href = "http://localhost:3001/auth/google/";
+      sendDataToBackend()
+    } catch (error) {
+      console.error('Google Auth failed:', error);
+    }
+  };
+  
 
   const handleLAuth = async () => {
     try {
@@ -65,7 +95,6 @@ function App() {
         email: user.email,
       });
       // navigate("/Dashboard"); 
-      setGetDate(false);
     } catch (err) {
       console.log("Twitter Authentication Error:", err);
     }
@@ -80,7 +109,6 @@ function App() {
       const user = result.user;
       console.log("User: ", user);
       console.log("Access Token: ", token);
-      setGetDate(false)
 
     } catch (error) {
       const errorCode = error.code;
@@ -92,92 +120,98 @@ function App() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-      if (isSignup) {
-        if (signupData.password === signupData.confirmPassword) {
-          try {
-            const response = await axios.post("http://localhost:3001/addUser", {
-              email: signupData.email,
-              password: signupData.password,
-            });
-  
-            if (response.status === 200) {
-              alert("User registered successfully!");
-              navigate("/dashboard");
-              setGetDate(false);
-  
-            }
-          } catch (err) {
-            console.error("Error during signup:", err);
-            if (err.response && err.response.data.error) {
-              alert(err.response.data.error);
-            } else {
-              alert("Failed to sign up. Please try again.");
-              // setSignupData({
-              //   email: "",
-              //   password: "",
-              //   confirmPassword: "",
-              // });
-            }
-          }
-        } else {
-          alert("Passwords do not match.");
-        }
+    if (signupData.password !== signupData.confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await axios.post("http://localhost:3001/addUser", {
+        email: signupData.email,
+        password: signupData.password,
+      });
+
+      if (response.status === 200) {
+        alert("User registered successfully!");
+        dispatch(setUsername(signupData.email));
+        setGetDate(false)
       }
-    
+    } catch (err) {
+      console.error("Error during signup:", err);
+      if (err.response && err.response.data.error) {
+        alert(err.response.data.error);
+      } else {
+        alert("Failed to sign up. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   // Handle Login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await axios.post('http://localhost:3001/login', {
         email: signupData.email,
         password: signupData.password,
       });
-      console.log("POsted")
-
 
       if (response.status === 200) {
         console.log('Login successful:', response.data);
+        dispatch(setUsername(response.data.email || signupData.email));
         navigate("/dashboard");
-        // setGetDate(false);
       }
     } catch (error) {
-      if (error.status === 404) {
-        alert("User not found");
-
+      console.error("Login Error:", error);
+      if (error.response && error.response.status === 404) {
+        alert("User not found. Please sign up.");
+      } else {
+        alert("Login failed. Please check your credentials and try again.");
       }
-      // alert("Not registered? Please sign up.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    if (isSignup) {
+      handleSignup(e);
+    } else {
+      handleLogin(e);
     }
   };
 
   // date of birth
 
-  const handleDateOfBirthSubmit = async (e) => {
-    e.preventDefault();
-    if (isSignup) {
-      try {
-        const response = await axios.post("http://localhost:3001/BirthPost", {
-          username: signupData.username,
-          birth: {
-            day: signupData.birth.day,
-            month: signupData.birth.month,
-            year: signupData.birth.year,
-          },
-          Gender: signupData.Gender,
-          email: signupData.email,
-        });
-        dispatch(setUsername(signupData.username))
-        alert(response.status);
-        navigate("/Dashboard");
-      } catch (err) {
-        console.log(err);
-        alert(err);
-      }
-    }
-  };
+  // const handleDateOfBirthSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (isSignup) {
+  //     try {
+  //       const response = await axios.post("http://localhost:3001/BirthPost", {
+  //         username: signupData.username,
+  //         birth: {
+  //           day: signupData.birth.day,
+  //           month: signupData.birth.month,
+  //           year: signupData.birth.year,
+  //         },
+  //         Gender: signupData.Gender,
+  //         email: signupData.email,
+  //       });
+  //       dispatch(setUsername(signupData.username))
+  //       alert(response.status);
+  //       navigate("/Dashboard");
+  //     } catch (err) {
+  //       console.log(err);
+  //       alert(err);
+  //     }
+  //   }
+  // };
 
 
   return (
@@ -185,159 +219,89 @@ function App() {
       <div className="Image-container">
         {/* Add any additional content or images here */}
       </div>
-      {getDate || !isSignup ? (
-        <form onSubmit={isSignup ? handleSubmit : handleLogin} className="Form-container">
-          <img src={Logo} alt="Logo" className="Logo" />
-          <div className="Form-elements">
-            {isSignup ? (
-              <p className="Title">
-                SIGN <span style={{ color: "rgb(0, 191, 255)" }}>UP</span>
-              </p>
-            ) : (
-              <p className="Title">
-                LOG<span style={{ color: "rgb(0, 191, 255)" }}>IN</span>
-              </p>
-            )}
-            <input
-              type="text"
-              name="email"
-              placeholder="email"
-              autoComplete="off"
-              className="input"
-              value={signupData.email}
-              onChange={handleChange}
-              required
-            />
 
+      {GetDate ? <form onSubmit={isSignup ? handleSubmit : handleLogin} className="Form-container">
+        <img src={Logo} alt="Logo" className="Logo" />
+        <div className="Form-elements">
+          {isSignup ? (
+            <p className="Title">
+              SIGN <span style={{ color: "rgb(0, 191, 255)" }}>UP</span>
+            </p>
+          ) : (
+            <p className="Title">
+              LOG<span style={{ color: "rgb(0, 191, 255)" }}>IN</span>
+            </p>
+          )}
+          <input
+            type="text"
+            name="email"
+            placeholder="email"
+            autoComplete="off"
+            className="input"
+            value={signupData.email}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            autoComplete="off"
+            className="input"
+            value={signupData.password}
+            onChange={handleChange}
+            required
+          />
+
+          {isSignup && (
             <input
               type="password"
-              name="password"
-              placeholder="password"
+              name="confirmPassword"
+              placeholder="confirm password"
               autoComplete="off"
               className="input"
-              value={signupData.password}
+              value={signupData.confirmPassword}
               onChange={handleChange}
               required
             />
+          )}
 
-            {isSignup && (
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="confirm password"
-                autoComplete="off"
-                className="input"
-                value={signupData.confirmPassword}
-                onChange={handleChange}
-                required
-              />
-            )}
+          <button type="submit" className="SignUp-btn" disabled={loading}>
+            {loading ? "Please wait..." : isSignup ? "Sign Up" : "Login"}
+          </button>
 
-            <button type="submit" className="SignUp-btn">
-              {isSignup ? "Sign Up" : "Login"}
-            </button>
 
-            <div className="OAuth-container">
-              <span className="Google" onClick={handleGAuth}>
-                <img src={Google} alt="Google" className="Google" />
-              </span>
-              <span onClick={handleLAuth}>
-                <img src={LinkedIN} alt="LinkedIn" className="Google" />
-              </span>
-              <span onClick={handleFAuth}>
-                <img src={facebook} alt="Facebook" className="Google" />
-              </span>
-            </div>
-
-            <span className="line">
-              <hr /> or <hr />
+          <div className="OAuth-container">
+            <span className="Google" onClick={ isSignup ? handleGAuth : handleGLoginAuth}>
+              <img src={Google} alt="Google" className="Google" />
             </span>
-
-            {isSignup ? (
-              <p className="Already-Account">
-                Already have an account?{" "}
-                <span onClick={() => setIsSignup(!isSignup)}>Login</span>
-              </p>
-            ) : (
-              <p className="Already-Account">
-                Create your own account?{" "}
-                <span onClick={() => setIsSignup(!isSignup)}>Sign Up</span>
-              </p>
-            )}
+            <span onClick={handleLAuth}>
+              <img src={LinkedIN} alt="LinkedIn" className="Google" />
+            </span>
+            <span onClick={handleFAuth}>
+              <img src={facebook} alt="Facebook" className="Google" />
+            </span>
           </div>
-        </form>
-      ) : (
-        <form onSubmit={handleDateOfBirthSubmit} className="date-input-container">
-          <section className="name-input-container">
-            <input
-              name="username"
-              type="text"
-              placeholder="username"
-              required
-              className="name-input"
-              value={signupData.username}
-              onChange={handleChange}
-            />
-            <input
-              name="Gender"
-              type="text"
-              placeholder="Gender"
-              required
-              className="gender-input"
-              value={signupData.Gender}
-              onChange={handleChange}
-            />
 
+          <span className="line">
+            <hr /> or <hr />
+          </span>
 
-          </section>
-          <div className="date-container">
-            <input
-              name="day"
-              type="number"
-              placeholder="DD"
-              maxLength={2}
-              required
-              className="date-input"
-              value={signupData.birth.day}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value.length <= 2) {
-                  handleChange(e);
-                }
-              }} />
-            <input
-              name="month"
-              type="number"
-              required
-              placeholder="MM"
-              maxLength={2}
-              className="date-input"
-              value={signupData.birth.month}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value.length <= 2) {
-                  handleChange(e);
-                }
-              }} />
-            <input
-              name="year"
-              type="number"
-              placeholder="YYYY"
-              required
-              maxLength={4}
-              className="date-input"
-              value={signupData.birth.year}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value.length <= 4) {
-                  handleChange(e);
-                }
-              }}
-            />
-          </div>
-          <button type="submit" className="Date-btn">Submit</button>
-        </form>
-      )}
+          {isSignup ? (
+            <p className="Already-Account">
+              Already have an account?{" "}
+              <span onClick={() => setIsSignup(!isSignup)}>Login</span>
+            </p>
+          ) : (
+            <p className="Already-Account">
+              Create your own account?{" "}
+              <span onClick={() => setIsSignup(!isSignup)}>Sign Up</span>
+            </p>
+          )}
+        </div>
+      </form> : <DOB email={signupData.email}/> }
+
     </div>
   );
 }
