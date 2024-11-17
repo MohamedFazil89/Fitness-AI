@@ -41,7 +41,6 @@ function App({ DOBState }) {
 
   const sendDataToBackend = async () => {
     try {
-      // Send a POST request to your backend
       const response = await axios.post('http://localhost:3001/getStatus', {
         Status: isSignup,
       }, {
@@ -65,7 +64,6 @@ function App({ DOBState }) {
     e.preventDefault()
     // setGetDate(false)
     try {
-      // This will initiate Google login flow in a new tab/window
       window.location.href = "http://localhost:3001/auth/google";
       sendDataToBackend()
     } catch (error) {

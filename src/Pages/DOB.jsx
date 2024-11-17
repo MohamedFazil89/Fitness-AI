@@ -10,7 +10,7 @@ function DOB() {
   const fetchUserEmail = async () => {
     try {
       const response = await axios.get('http://localhost:3001/api/user', {
-        withCredentials: true // Include session cookies
+        withCredentials: true 
       });
       setEmail(response.data.email);
     } catch (error) {
