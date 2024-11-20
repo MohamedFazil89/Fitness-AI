@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard';
 import Settings from './Pages/Settings';
 import Chat from './Pages/Chat';
 import DOB from './Pages/DOB';
+import Home from './Pages/Home';
 
 
 import { Provider } from "react-redux";
@@ -19,9 +20,10 @@ function AppRoutes() {
   let routes = useRoutes([
     { path: '/', element: <App /> },
     { path: '/dashboard', element: <Dashboard /> },
-    { path: '/settings', element: <Settings /> },
-    { path: '/messages', element: <Chat /> },
+    { path: '/dashboard/settings', element: <Settings /> },
+    { path: '/dashboard/messages', element: <Chat /> },
     { path: '/dob', element: <DOB /> },
+    { path: '/dashboard/Home', element: <Home /> },
 
 
   ]);

@@ -8,21 +8,28 @@ import LogoutIcon from "../assets/Logout.png";
 import Logo from "../assets/FLOGO.png"
 import ProfilePic from "../assets/profilepic.png"
 import "./styles/Nav.css"
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faQuestion } from '@fortawesome/free-solid-svg-icons';
 // import { useSelector } from 'react-redux';
+import Tabs from "./Tabs"
 
-export default function Nav({ props }) {
+
+export default function Nav({ initPage }) {
     const [isToggled, setIsToggled] = useState(false);
-    const [currentPage, setCurrentPage] = useState("Dashboard");  
+    const [currentPage, setCurrentPage] = useState(initPage);  
     // const username = useSelector((state) => state.user.username)
+    const navigate = useNavigate();
 
     const handleToggle = () => {
         setIsToggled(!isToggled);
     };
 
     const changePage = (page) => {
+        page === "dashboard" ? navigate(`/dashboard`) : navigate(`/dashboard/${page}`);
         setCurrentPage(page);
+
+        
     };
 
     const getIconClass = (page) => {
@@ -58,14 +65,14 @@ export default function Nav({ props }) {
 
             <section className='body-con'>
             <div className='Nav-container'>
-                <img src={DashboardIcon} alt='Dashboard Icon' className={getIconClass("Dashboard")} onClick={() => changePage("Dashboard")} />
+                <img src={DashboardIcon} alt='Dashboard Icon' className={getIconClass("Dashboard")} onClick={() => changePage("dashboard")} />
                 <img src={HomeIcon} alt='Home Icon' className={getIconClass("Home")} onClick={() => changePage("Home")} />
                 <img src={SearchIcon} alt='Search Icon' className={getIconClass("Search")} onClick={() => changePage("Search")} />
                 <img src={ChatIcon} alt='Chat Icon' className={getIconClass("Messages")} onClick={() => changePage("Messages")} />
                 <img src={SettingIcon} alt='Settings Icon' className={getIconClass("Settings")} onClick={() => changePage("Settings")} />
                 <img src={LogoutIcon} alt='Logout Icon' className={getIconClass("Logout")} onClick={() => changePage("Logout")} />
             </div>
-            {/* {<Messages />} */}
+            <Tabs />
             
             </section>
         </div>

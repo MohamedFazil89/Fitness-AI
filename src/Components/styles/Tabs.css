@@ -1,12 +1,15 @@
 .tab-container{
     margin-top: 1.5rem;
+    overflow: hidden;
+
 
 }
 
 .Trackers-section{
     display: flex;
-    margin-right: auto;
+    margin: 0 auto;
     gap: 1rem;
+    justify-content: flex-end;
 
 }
 
@@ -22,14 +25,16 @@
     margin: .5rem;
 }
 
-.Trackers{
-    background-color: #3DB1D6;
-    padding: .2rem;
-    border-radius: 1rem;
-    margin-left: 67rem;
-    
 
-}
+.Trackers {
+    background-color: #3DB1D6;
+    color: white;
+    padding: 0.2rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem; /* Matches earlier design */
+    font-weight: 500;
+    cursor: pointer;
+  }
 
 .Heart{
     color: #3DB1D6;

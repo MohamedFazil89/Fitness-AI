@@ -6,7 +6,7 @@ import "./styles/Dashboard.css"
 export default function Dashboard() {
   return (
     <div className='Dashboard-container'>
-      <Nav />
+      <Nav initPage={"Dashboard"}/>
     </div>
   )
 }
