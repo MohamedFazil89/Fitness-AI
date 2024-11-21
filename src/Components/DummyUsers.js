@@ -6,21 +6,26 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'sender'
+        role: 'sender',
+        follower: true  
     },
     {
         id: 2,
         Name: 'Jane Doe',
         LastMessage: "I'm good, thanks!",
         profilepic: Profile,
-        role:'receiver'
+        role:'receiver',
+        follower: false
+
         },
     {
         id: 3,
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'sender'
+        role: 'sender',
+        follower: true  
+
 
     },
     {
@@ -28,14 +33,18 @@ const DummyUsers = [
         Name: 'Fazil',
         LastMessage: "I'm good, thanks!",
         profilepic: Profile,
-        role: 'receiver'
+        role: 'receiver',
+        follower: false
+
     },
     {
         id: 5,
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role:'sender'
+        role:'sender',
+        follower: true  
+
 
     },
     {
@@ -43,7 +52,9 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'sender'
+        role: 'sender',
+        follower: true  
+
 
     },
     {
@@ -51,7 +62,9 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'sender'
+        role: 'sender',
+        follower: true  
+
 
     },
     {
@@ -59,7 +72,10 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'sender'
+        role: 'sender',
+        follower: true,
+        
+
 
     },
     {
@@ -67,7 +83,9 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'receiver'
+        role: 'receiver',
+        follower: false
+
 
     },
     {
@@ -75,7 +93,9 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'receiver'
+        role: 'receiver',
+        follower: false
+
 
     },
     {
@@ -83,7 +103,9 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'sender'
+        role: 'sender',
+        follower: true  
+
 
     },
     {
@@ -91,7 +113,9 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'sender'
+        role: 'sender',
+        follower: true  
+
 
     },
     {
@@ -99,7 +123,8 @@ const DummyUsers = [
         Name: 'John Doe',
         LastMessage: "How are you!",
         profilepic: Profile,
-        role: 'receiver'
+        role: 'receiver',
+        follower: false
 
     },
 

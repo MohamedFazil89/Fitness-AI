@@ -14,7 +14,8 @@ body{
     /* background-color: #1c1c1c; */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    border: 1px solid green;
+    /* border: 1px solid green; */
+    width: 40rem;
     
     
 }
@@ -31,35 +32,90 @@ body{
     margin-left: auto;
 }
 .chatbox{
-    border: 1px solid white;
+    background-color: black;
     display: flex;
     flex-direction: column;
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: scroll;
+    margin-bottom: 1rem;
 
    
 
 }
+.message-input{
+    all: unset;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    flex-basis: 500px;
+    margin: .5rem;
+    
 
+
+}
 .sender{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 
+}
+
+.receiver > img, .sender > img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: black;
+    border: 1px solid white;
 }
 
 .sender > p{
     margin: .5rem;
+    background-color: white;
+    color: black;
+    width: fit-content;
+}
+
+
+
+.receiver > p, .sender > p{
+    padding: .5rem;
+    border-radius: 50px;
+
 }
 
 .receiver{
+    display: flex;
     margin-left: auto;
+    flex-direction: row-reverse;
 }
 
 .receiver > p{
     margin: .5rem;
+    background-color: rgb(27, 198, 255);
+    color: black;
 
 }
 
 .messagebox{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    /* justify-content: space-between; */
+    background-color: black;
+    color: white;
+    border-radius: 50px;
 
+
+}
+
+.icons{
+    margin: .5rem;
+    margin-top: 1.2rem;
+    /* border: 1px solid white; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icons > span{
+    margin-right: .1rem;
 }
