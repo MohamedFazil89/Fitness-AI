@@ -1,0 +1,65 @@
+body{
+    color: white;
+}
+
+.PrivateChat-container{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width: 30rem;
+    position: absolute;
+    right: 5rem;
+    top: 8rem;
+    margin: 1rem;
+    /* background-color: #1c1c1c; */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border: 1px solid green;
+    
+    
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+}
+
+.follow{
+    margin-left: auto;
+}
+.chatbox{
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow-y: scroll;
+
+   
+
+}
+
+.sender{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.sender > p{
+    margin: .5rem;
+}
+
+.receiver{
+    margin-left: auto;
+}
+
+.receiver > p{
+    margin: .5rem;
+
+}
+
+.messagebox{
+
+}

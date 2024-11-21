@@ -7,6 +7,7 @@
 body {
     overflow: hidden;
 }
+
 @media (prefers-color-scheme: light) {
     body {
         background-color: white;
@@ -27,11 +28,14 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
-.ChatList-Container > h1{
+
+.ChatList-Container>p {
     margin: .5rem;
-  font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
 
 }
+
 .ChatList-Header {
     color: white;
     background-color: black;
@@ -41,10 +45,13 @@ body {
     justify-content: center;
     border-bottom: 1px solid #333;
     flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 5px 10px 10px black;
+
 
 }
-.ChatList-Header > input {
+
+.ChatList-Header>input {
     all: unset;
     padding: .5rem 1.5rem;
     border: 1px solid white;
@@ -55,7 +62,7 @@ body {
 }
 
 .ChatList-Body {
-    max-height: 400px; 
+    max-height: 400px;
     overflow-y: auto;
     /* background-color: #1c1c1c; */
 }
@@ -75,25 +82,29 @@ body {
     align-items: center;
     padding: 1rem;
     border-bottom: 1px solid #333;
-    transition: background-color 0.2s ease;
+    transition: 0.2s ease;
+    cursor: pointer;
 }
 
 .ChatList-Item:hover {
-    /* background-color: #2a2a2a; */
+    /* transform: scale(1.02); */
+    /* filter: drop-shadow(0 0 10px white); */
 }
 
-.ChatList-Item > img {
+.ChatList-Item>img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 1rem; /* Ensures spacing */
-   
+    margin-right: 1rem;
+    /* Ensures spacing */
+
 }
 
 .text-details {
     display: flex;
     flex-direction: column;
-    flex: 1; /* Occupy remaining space */
+    flex: 1;
+    /* Occupy remaining space */
 }
 
 .text-details h2 {
@@ -108,7 +119,7 @@ body {
     font-size: 0.85rem;
 }
 
-.ChatList-Item > button {
+.ChatList-Item>button {
     all: unset;
     padding: 0.5rem 2rem;
     color: aqua;
@@ -116,10 +127,10 @@ body {
     border-radius: 10px;
     cursor: pointer;
     font-size: 0.8rem;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: 0.2s ease, color 0.2s ease;
 }
 
-.ChatList-Item > button:hover {
+.ChatList-Item>button:hover {
     background-color: aqua;
     color: black;
 }
