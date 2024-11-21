@@ -16,6 +16,7 @@ body{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     /* border: 1px solid green; */
     width: 40rem;
+    font-family: 'Montserrat', sans-serif;
     
     
 }
@@ -60,11 +61,11 @@ body{
 }
 
 .receiver > img, .sender > img{
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     background-color: black;
-    border: 1px solid white;
+    border: 1px solid;
 }
 
 .sender > p{
@@ -79,6 +80,7 @@ body{
 .receiver > p, .sender > p{
     padding: .5rem;
     border-radius: 50px;
+    font-size: .8rem;
 
 }
 
