@@ -134,3 +134,10 @@ body {
     background-color: aqua;
     color: black;
 }
+
+.ChatList-Item > button:active{
+    transform: scale(0.98);
+    background-color: aqua;
+    color: black;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}

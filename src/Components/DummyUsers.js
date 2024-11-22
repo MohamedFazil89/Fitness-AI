@@ -1,133 +1,97 @@
-import Profile from "../assets/google.png"
+import Profile from "../assets/google.png";
 
 const DummyUsers = [
     {
         id: 1,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Alice Smith',
+        LastMessage: "Hey, are we still on for tomorrow?",
         profilepic: Profile,
         role: 'sender',
-        follower: true  
     },
     {
         id: 2,
-        Name: 'Jane Doe',
-        LastMessage: "I'm good, thanks!",
+        Name: 'Bob Johnson',
+        LastMessage: "Yes, 5 PM works perfectly!",
         profilepic: Profile,
-        role:'receiver',
-        follower: false
-
-        },
+        role: 'receiver',
+    },
     {
         id: 3,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Catherine Brown',
+        LastMessage: "Can you share the files, please?",
         profilepic: Profile,
         role: 'sender',
-        follower: true  
-
-
     },
     {
         id: 4,
-        Name: 'Fazil',
-        LastMessage: "I'm good, thanks!",
+        Name: 'Daniel Wilson',
+        LastMessage: "Sure, give me a moment.",
         profilepic: Profile,
         role: 'receiver',
-        follower: false
-
     },
     {
         id: 5,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Emma Davis',
+        LastMessage: "Thanks for the help earlier!",
         profilepic: Profile,
-        role:'sender',
-        follower: true  
-
-
+        role: 'sender',
     },
     {
         id: 6,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Franklin Harris',
+        LastMessage: "No problem, glad I could help.",
         profilepic: Profile,
-        role: 'sender',
-        follower: true  
-
-
+        role: 'receiver',
     },
     {
         id: 7,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Grace Lee',
+        LastMessage: "Did you watch the game last night?",
         profilepic: Profile,
         role: 'sender',
-        follower: true  
-
-
     },
     {
         id: 8,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Henry Martin',
+        LastMessage: "Yeah, it was amazing!",
         profilepic: Profile,
-        role: 'sender',
-        follower: true,
-        
-
-
+        role: 'receiver',
     },
     {
         id: 9,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Ivy Clark',
+        LastMessage: "What’s the plan for the weekend?",
         profilepic: Profile,
-        role: 'receiver',
-        follower: false
-
-
+        role: 'sender',
     },
     {
         id: 10,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Jake Wright',
+        LastMessage: "Let’s go hiking!",
         profilepic: Profile,
         role: 'receiver',
-        follower: false
-
-
     },
     {
         id: 11,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Luna Edwards',
+        LastMessage: "I’ll call you in 10 minutes.",
         profilepic: Profile,
         role: 'sender',
-        follower: true  
-
-
     },
     {
         id: 12,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Mason Green',
+        LastMessage: "Sounds good, talk to you then.",
         profilepic: Profile,
-        role: 'sender',
-        follower: true  
-
-
+        role: 'receiver',
     },
     {
         id: 13,
-        Name: 'John Doe',
-        LastMessage: "How are you!",
+        Name: 'Nina Perez',
+        LastMessage: "Can we reschedule our meeting?",
         profilepic: Profile,
-        role: 'receiver',
-        follower: false
-
+        role: 'sender',
     },
-
-]
+];
 
 export default DummyUsers;

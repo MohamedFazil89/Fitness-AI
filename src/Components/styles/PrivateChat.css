@@ -21,6 +21,15 @@ body{
     
 }
 
+.profile-picture{
+    border: 1px solid white;
+    border-radius: 50%;
+}
+.Name{
+    margin-left: .5rem;
+
+}
+
 .header{
     display: flex;
     justify-content: space-between;
@@ -31,6 +40,27 @@ body{
 
 .follow{
     margin-left: auto;
+    border: 2px solid white;
+    padding: .2rem .9rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.follow::selection, .nofollow::selection{
+    background: transparent; /* Removes text selection */
+}
+.nofollow{
+    margin-left: auto;
+    padding: .2rem .9rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .5s;
+    background-color: aqua;
+    font-weight: bold;
+    color: black;
+    transition: all .2s;
+
 }
 .chatbox{
     background-color: black;
@@ -39,10 +69,11 @@ body{
     max-height: 350px;
     overflow-y: scroll;
     margin-bottom: 1rem;
-
-   
-
+    -ms-overflow-style: none;
 }
+.chatbox::-webkit-scrollbar {
+    display: none; /* Hides scrollbar in Chrome, Safari, and Edge */
+  }
 .message-input{
     all: unset;
     padding: 1rem;
@@ -67,7 +98,14 @@ body{
     background-color: black;
     border: 1px solid;
 }
+.receiver > img{
+    margin-right: .5rem;
 
+}
+.sender > img{
+    margin-left: .5rem;
+
+}
 .sender > p{
     margin: .5rem;
     background-color: white;
@@ -82,6 +120,11 @@ body{
     border-radius: 50px;
     font-size: .8rem;
 
+}
+
+.send{
+    /* all: unset; */
+    cursor: pointer;
 }
 
 .receiver{
@@ -120,4 +163,5 @@ body{
 
 .icons > span{
     margin-right: .1rem;
+    cursor: pointer;
 }
