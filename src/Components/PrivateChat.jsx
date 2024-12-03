@@ -1,32 +1,72 @@
-import React, { useState } from 'react'
-import "./styles/PrivateChat.css"
-import DummyUsers from "./DummyUsers"
-import image from "../assets/Chat.png"
+import React, { useState, useEffect } from 'react';
+import "./styles/PrivateChat.css";
+import DummyUsers from "./DummyUsers";
+import image from "../assets/Chat.png";
+import axios from "axios";
 
 export default function PrivateChat() {
   const [typemessage, typesetMessage] = useState('');
-  const [isfollow, setIsFollow] = useState(false);
+  const [chatData, setChatData] = useState([
+    {
+      id: 0,
+      users: [ { user1: "", user2: ""}],
+      messages: [
+        { role: "", message: ""},
+      ]
+    }
+  ]);
+  
 
+  useEffect(() => {
+    const fetchChatData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/CurrentUserInfo");
+        setChatData(response.data);
+        console.log(response.data);
+        
+      } catch (error) {
+        console.error("Error fetching chat data:", error);
+      }
+    };
+    fetchChatData();
+  }, []);
 
   const MessageSend = (e) => {
     e.preventDefault();
     console.log(typemessage);
+    if(!typemessage){
+      console.log(" ");
+      
+    }else{
+      
+      typesetMessage('');
+
+    }
   }
+
+  const toggleFollow = () => {
+
+   
+  };
+
+ 
+  
+
 
   return (
     <section className='PrivateChat-container'>
       <div className="header">
         <img src={image} alt="profile" className='profile-picture' />
-        <p className='Name'>Name</p>
-        <p className={ isfollow ? 'follow' : 'nofollow' } onClick={() => setIsFollow(!isfollow)}>{isfollow ? 'following' : 'follow'}</p>
+        <p className="Name">{"Name" || "Loading..."}</p>
+        <p className={ true ? 'follow' : 'nofollow' } onClick={toggleFollow}>{true ? 'following' : 'follow'}</p>
       </div>
 
       <div className="chatbox">
-        {DummyUsers.map((users) => (
+        {DummyUsers.map((users, index) => (
           <div className={`${users.role === 'receiver' ? 'receiver' : 'sender'}`}>
             {/* Sender messages */}
             <img src={image} alt="" />
-            <p key={users.id}>{users.LastMessage}</p>
+            <p key={index}>{users.LastMessage}</p>
 
           </div>
 
