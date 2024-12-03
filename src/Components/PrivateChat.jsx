@@ -60,7 +60,7 @@ export default function PrivateChat() {
       <div className="header">
         <img src={image} alt="profile" className='profile-picture' />
         <p className="Name">{"Name" || "Loading..."}</p>
-        <p className={ true ? 'follow' : 'nofollow' } onClick={toggleFollow}>{follow ? 'following' : 'follow'}</p>
+        <p className={ follow ? 'follow' : 'nofollow' } onClick={toggleFollow}>{follow ? 'following' : 'follow'}</p>
       </div>
 
       <div className="chatbox">
