@@ -6,6 +6,7 @@ import axios from "axios";
 
 export default function PrivateChat() {
   const [typemessage, typesetMessage] = useState('');
+  const [follow, setFollow] = useState(false);
   const [chatData, setChatData] = useState([
     {
       id: 0,
@@ -45,6 +46,7 @@ export default function PrivateChat() {
   }
 
   const toggleFollow = () => {
+    setFollow(!follow);
 
    
   };
@@ -58,7 +60,7 @@ export default function PrivateChat() {
       <div className="header">
         <img src={image} alt="profile" className='profile-picture' />
         <p className="Name">{"Name" || "Loading..."}</p>
-        <p className={ true ? 'follow' : 'nofollow' } onClick={toggleFollow}>{true ? 'following' : 'follow'}</p>
+        <p className={ true ? 'follow' : 'nofollow' } onClick={toggleFollow}>{follow ? 'following' : 'follow'}</p>
       </div>
 
       <div className="chatbox">
