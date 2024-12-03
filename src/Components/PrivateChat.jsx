@@ -7,15 +7,9 @@ import axios from "axios";
 export default function PrivateChat() {
   const [typemessage, typesetMessage] = useState('');
   const [follow, setFollow] = useState(false);
-  const [chatData, setChatData] = useState([
-    {
-      id: 0,
-      users: [ { user1: "", user2: ""}],
-      messages: [
-        { role: "", message: ""},
-      ]
-    }
-  ]);
+  const [chatData, setChatData] = useState({
+    messages: []
+  });
   
 
   useEffect(() => {
@@ -34,16 +28,17 @@ export default function PrivateChat() {
 
   const MessageSend = (e) => {
     e.preventDefault();
-    console.log(typemessage);
-    if(!typemessage){
-      console.log(" ");
-      
-    }else{
-      
-      typesetMessage('');
+    if (!typemessage) return;
 
-    }
-  }
+    setChatData((prev) => ({
+      ...prev,
+      messages: [
+        ...prev.messages,
+        { role: 'receiver', message: typemessage }
+      ]
+    }));
+    typesetMessage('');
+  };
 
   const toggleFollow = () => {
     setFollow(!follow);
@@ -64,14 +59,14 @@ export default function PrivateChat() {
       </div>
 
       <div className="chatbox">
-        {DummyUsers.map((users, index) => (
-          <div className={`${users.role === 'receiver' ? 'receiver' : 'sender'}`}>
-            {/* Sender messages */}
+      {chatData?.messages?.map((msg, index) => (
+          <div
+            key={index}
+            className={`${msg.role === 'receiver' ? 'receiver' : 'sender'}`}
+          >
             <img src={image} alt="" />
-            <p key={index}>{users.LastMessage}</p>
-
+            <p>{msg.message}</p>
           </div>
-
         ))}
 
       </div>
