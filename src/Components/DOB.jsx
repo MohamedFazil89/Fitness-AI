@@ -61,7 +61,12 @@ export default function DOB({ email }) {
                 navigate("/dashboard");
             } catch (err) {
                 console.error("Error during DOB submission:", err);
+                if(err.response.status === 400){
+                    alert("username already exist!")
+                }else{
                 alert("An error occurred while submitting your information. Please try again.");
+
+                }
             }
         }
     };
