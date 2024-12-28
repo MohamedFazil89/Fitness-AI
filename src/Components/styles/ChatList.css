@@ -104,13 +104,14 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
-    /* Occupy remaining space */
+    font-family: 'Montserrat', sans-serif;
 }
 
 .text-details h2 {
     margin: 0;
     font-size: 1rem;
     color: white;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .text-details p {
@@ -128,6 +129,8 @@ body {
     cursor: pointer;
     font-size: 0.8rem;
     transition: 0.2s ease, color 0.2s ease;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 .ChatList-Item>button:hover {
