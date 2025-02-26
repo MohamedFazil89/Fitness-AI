@@ -1,0 +1,256 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    /* border: 1px solid white; */
+
+  }
+
+  .dashboard > p{
+    font-family: 'Montserrat Alternates';
+    color: white;
+  }
+
+  .dropdown > *{
+    cursor: pointer;
+  }
+  .subdashboard{
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    /* background: #111; */
+    color: white;
+    justify-content: space-evenly;
+
+
+
+
+  }
+  
+  .sidebar {
+    /* width: 20%; */
+    /* background: #222; */
+    padding: 0px 10px ;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat';
+  }
+  
+  .score-card {
+    text-align: center;
+    background: linear-gradient(90deg ,#2828285b, #25637679);
+    border-radius: 15px;
+    width: 308px;
+    height: 122px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 0 10px black;
+
+  }
+
+  .chart{
+    width: 100%;
+  }
+  
+  .circle {
+    width: 80px;
+    height: 80px;
+    /* background: conic-gradient(#4caf50 73%, #444 73%); */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-size: 20px; */
+    /* margin: 10px auto; */
+  }
+  
+  button{
+    all: unset;
+  }
+  .p {
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg ,#2828285b, #256376);
+    padding: .5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+.Sessions-img{
+  width: 15%;
+}
+  
+  .analytics {
+    flex-grow: 1;
+    background: #222;
+    padding: 10px 50px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .chart-container {
+    position: relative;
+    background: linear-gradient(90deg ,#2828285b, #256376);
+    padding: 40px 100px;
+    border-radius: 10px;
+    display: flex;
+    align-items: left;
+    box-shadow: 0 0 10px black;
+    flex-direction: column;
+  }
+  
+
+  .charttop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+  .Data{
+    width: 5%;
+    display: flex;
+
+  }
+  .stats-cards {
+    display: flex;
+    justify-content: space-evenly;
+    /* margin-top: 20px; */
+  }
+  .Top-ele{
+    position: absolute;
+    top: 10px;
+    width: 100%;
+  }
+  .left{
+    position: absolute;
+    left: 10px;
+  }
+  
+  .dropdown{
+    position: absolute;
+    right: 120px;
+    border: 1px solid white;
+    padding: .3rem;
+    border-radius: 20px;
+
+  }
+
+  .dropdown > *:hover{
+    background-color: transparent;
+  }
+  .burned, .remaining {
+    background: #484848;
+    padding: 30px 43px;
+    border-radius: 10px;
+    margin: .5rem;
+    box-shadow: 0 0 10px black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+  }
+
+  .Icon{
+    width: 15%;
+  }
+
+  
+  .tracker {
+    width: 40%;
+    background: radial-gradient(#3498db, #222);
+    padding: 40px 60px;
+    border-radius: 10px;
+    font-family: 'Montserrat Alternates';
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 10px black);
+
+  }
+  .tracker > *{
+    filter: drop-shadow(0 0 10px black);
+
+  }
+  
+  .connect-btn {
+    background: #3498db; 
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* ----------------- */
+
+  
+.EmotionAnalyses{
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background-color: rgb(1, 49, 65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  left: 170px;
+  border-radius: 2rem;
+  z-index: 100;
+}
+.EmotionAnalyses .Optionbth{
+  all: unset;
+  position: relative;
+  padding: 1rem;
+  background-color: rgba(0, 40, 53, 0.8);
+  border-radius: 1rem;
+  margin: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
+/* Circle inside the switch */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: black; /* Circle color */
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Checked state - background and circle move */
+input:checked + .slider {
+  background-color: black; /* Blue background for active state */
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px); /* Move the circle to the right */
+  background-color: #00bfff;
+}
+/*  end */
+  
+.dropdown-menu{
+  position: fixed;
+  background-color: black;
+  list-style-type: none;
+  padding: 1rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}

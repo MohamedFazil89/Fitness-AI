@@ -7,7 +7,6 @@ export default function ChatList() {
   const [SearchTerm, setSearchTerm] = useState('');
   const [UserName, setUserName] = useState([]);
 
-  // Filter usernames based on the search term
   const filterUsers = UserName.filter((user) =>
     user.toLowerCase().includes(SearchTerm.toLowerCase())
   );
@@ -17,7 +16,7 @@ export default function ChatList() {
       try {
         const response = await axios.get('http://localhost:3001/ChatList');
         console.log(response.data.usernames);
-        setUserName(response.data.usernames); // Set usernames array
+        setUserName(response.data.usernames); 
       } catch (error) {
         console.error('Error fetching data:', error);
       }

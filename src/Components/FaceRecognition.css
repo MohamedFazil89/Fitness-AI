@@ -1,0 +1,49 @@
+.face-recognition {
+    text-align: center;
+    background-color: rgba(0, 40, 53, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .webcam-container {
+    margin-bottom: 20px;
+  }
+  
+  .analyze-button {
+    background-color: #00d1b2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .analyze-button:hover {
+    background-color: #00a396;
+  }
+  
+  .captured-image-container {
+    margin-top: 20px;
+  }
+  
+  .captured-image {
+    /* width: 640px; */
+    /* height: 480px; */
+    border-radius: 10px;
+  }
+  
+  .result-container {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 40, 53, 0.8);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+
+.result-output{
+  display: flex;
+  margin: 20px;
+}

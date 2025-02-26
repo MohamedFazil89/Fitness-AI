@@ -15,6 +15,7 @@ import { faBell, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import Tabs from "./Tabs"
 
 
+
 export default function Nav({ initPage }) {
     const [isToggled, setIsToggled] = useState(false);
     const [currentPage, setCurrentPage] = useState(initPage);  
@@ -44,12 +45,15 @@ export default function Nav({ initPage }) {
         Logout: LogoutIcon,
     };
 
+   
+    
+
     return (
         <div className='OverAll-container'>
             <div className="Profile-View">
                 <section className='page-info'>
                     <img src={Logo} alt="Home" className='Logo' />
-                    <h1>{currentPage}</h1>
+                    <h1 className='CurrentPage-h1'>{currentPage}</h1>
                     <img src={icons[currentPage]} alt='icons' className='Icons top' />
                     <span className='question'><FontAwesomeIcon icon={faQuestion} size='1x' /></span>
                 </section>
@@ -59,9 +63,10 @@ export default function Nav({ initPage }) {
                         <span className="slider"></span>
                     </label>
                     <span className='bell'><FontAwesomeIcon icon={faBell} size='1x' /></span>
-                    <span className='profile-pic'><img src={ProfilePic} alt='profile' /></span>
+                   <button className='profile-pic-btn'> <span className='profile-pic'><img src={ProfilePic} alt='profile' /></span></button>
                 </section>
             </div>
+            
 
             <section className='body-con'>
             <div className='Nav-container'>
@@ -73,6 +78,8 @@ export default function Nav({ initPage }) {
                 <img src={LogoutIcon} alt='Logout Icon' className={getIconClass("Logout")} onClick={() => changePage("Logout")} />
             </div>
             <Tabs />
+               
+            
             
             </section>
         </div>

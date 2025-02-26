@@ -9,8 +9,17 @@
 .Dashboard-container{
     background-color: #0E0E0E;
     display: flex;
+    flex-direction: column;
     /* justify-content: center; */
     /* align-items: center; */
     height: 100vh;
     overflow: hidden;
+}
+
+
+.dashboard-container{
+    position: absolute;
+    left: 6.6rem;
+    top: 9rem;
+
 }
