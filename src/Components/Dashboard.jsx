@@ -151,7 +151,9 @@ const Dashboard = () => {
         </div>
       </div>
       {Camera ? <div className="EmotionAnalyses">
+        <span className="Close" onClick={handelCameraOpen}>X</span>
         <div className="btn-container" style={{ bottom: `5rem` }}>
+
           <button onClick={faceRecognition} className='Optionbth'>FaceRecognition</button>
           <button onClick={questionAssessment} className='Optionbth'>QuestionAssessment</button>
         </div>
